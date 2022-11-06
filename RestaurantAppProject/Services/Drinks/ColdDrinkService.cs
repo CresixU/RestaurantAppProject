@@ -3,39 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RestaurantAppProject.Models.Products.Drinks;
 
-namespace RestaurantAppProject.Models.Products.Drinks
+namespace RestaurantAppProject.Services.Drinks
 {
-    internal class AlcoholService
+    internal class ColdDrinkService
     {
-        List<Alcohol> Alcohols = new List<Alcohol>();
+        List<ColdDrink> ColdDrinks = new List<ColdDrink>();
 
-        public void Create(string name, string description, decimal price, int capacity, decimal vol)
+        public void Create(string name, string description, decimal price, int capacity, decimal vol = 0)
         {
-            Alcohols.Add(new Alcohol(name, description, price, capacity, vol));
+            ColdDrinks.Add(new ColdDrink(name, description, price, capacity));
         }
 
-        public void ShowDetails(Alcohol drink)
+        public void ShowDetails(ColdDrink drink)
         {
             Console.WriteLine($"Name: {drink.Name}");
             Console.WriteLine($"Description: {drink.Description}");
             Console.WriteLine($"Price: {drink.Price}$");
             Console.WriteLine($"Points: {drink.RewardsInPoints}");
             Console.WriteLine($"Capacity: {drink.Capacity} ml");
-            Console.WriteLine($"Vol/Alc: {drink.AlcoholVolume} %");
         }
 
         public void ShowAll()
         {
-            foreach (Alcohol item in Alcohols)
+            foreach (ColdDrink item in ColdDrinks)
             {
                 ShowDetails(item);
             }
         }
 
-        public void Remove(Alcohol drink)
+        public void Remove(ColdDrink drink)
         {
-            Alcohols.RemoveAt(Alcohols.IndexOf(drink));
+            ColdDrinks.RemoveAt(ColdDrinks.IndexOf(drink));
         }
     }
 
