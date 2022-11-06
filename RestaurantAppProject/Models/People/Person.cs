@@ -8,7 +8,7 @@ namespace RestaurantAppProject.Models.People
 {
     internal abstract class Person
     {
-        protected Guid Id { get; set; }
+        protected Guid Id { get; }
         protected string Name { get; set; }
         protected string Surname { get; set; }
         protected DateOnly Birthdate { get; set; }
