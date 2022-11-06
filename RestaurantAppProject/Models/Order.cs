@@ -9,5 +9,6 @@ namespace RestaurantAppProject.Models
         public List<Item> items = new List<Item>();
         public DateTime OrderTime { get; set; }
         public decimal Price { get; set; }
+        public Person Owner { get; set; }
     }
 }
