@@ -9,13 +9,11 @@ namespace RestaurantAppProject.Models.Products
     public abstract class Drink : Item
     {
         public int Capacity { get; set; }
-        public decimal AlcoholVolume { get; set; }
 
-        public Drink(string name, string description, decimal price, int capacity,decimal alcoholVolume=0.0M)
+        public Drink(string name, string description, decimal price, int capacity)
             : base(name, description, price)
         {
             Capacity = capacity;
-            AlcoholVolume = alcoholVolume;
         }
     }
 }
