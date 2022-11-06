@@ -8,9 +8,11 @@ namespace RestaurantAppProject.Models.Products.Drinks
 {
     internal class Coffee : Drink
     {
+
         public Coffee(string name, string description, decimal price, int capacity)
             : base(name, description, price, capacity)
         {
         }
     }
+
 }
