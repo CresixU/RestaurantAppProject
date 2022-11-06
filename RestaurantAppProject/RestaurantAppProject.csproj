@@ -11,8 +11,4 @@
     <Compile Remove="Models\Products\IDrinkService.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Products\Foods\" />
-  </ItemGroup>
-
 </Project>

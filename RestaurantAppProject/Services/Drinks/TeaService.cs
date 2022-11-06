@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RestaurantAppProject.Models.Products;
 
-namespace RestaurantAppProject.Models.Products.Drinks
+namespace RestaurantAppProject.Services.Drinks
 {
     internal class TeaService
     {
         List<Tea> Teas = new List<Tea>();
 
-        public void Create(string name, string description, decimal price, int capacity, decimal vol=0)
+        public void Create(string name, string description, decimal price, int capacity, decimal vol = 0)
         {
             Teas.Add(new Tea(name, description, price, capacity));
         }

@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RestaurantAppProject.Models.Products.Drinks;
 
-namespace RestaurantAppProject.Models.Products.Drinks
+namespace RestaurantAppProject.Services.Drinks
 {
-    internal class ColdDrinkService
+    internal class CoffeeService
     {
-        List<ColdDrink> ColdDrinks = new List<ColdDrink>();
+        List<Coffee> Coffees = new List<Coffee>();
 
-        public void Create(string name, string description, decimal price, int capacity, decimal vol=0)
+        public void Create(string name, string description, decimal price, int capacity, decimal vol = 0)
         {
-            ColdDrinks.Add(new ColdDrink(name, description, price, capacity));
+            Coffees.Add(new Coffee(name, description, price, capacity));
         }
 
-        public void ShowDetails(ColdDrink drink)
+        public void ShowDetails(Coffee drink)
         {
             Console.WriteLine($"Name: {drink.Name}");
             Console.WriteLine($"Description: {drink.Description}");
@@ -26,15 +27,15 @@ namespace RestaurantAppProject.Models.Products.Drinks
 
         public void ShowAll()
         {
-            foreach (ColdDrink item in ColdDrinks)
+            foreach (Coffee item in Coffees)
             {
                 ShowDetails(item);
             }
         }
 
-        public void Remove(ColdDrink drink)
+        public void Remove(Coffee item)
         {
-            ColdDrinks.RemoveAt(ColdDrinks.IndexOf(drink));
+            Coffees.RemoveAt(Coffees.IndexOf(item));
         }
     }
 

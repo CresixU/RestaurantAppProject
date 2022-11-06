@@ -1,5 +1,5 @@
 ﻿using RestaurantAppProject.Models.Products;
-using RestaurantAppProject.Models.Products.Drinks;
+using RestaurantAppProject.Services.Drinks;
 
 namespace RestaurantAppProject
 {
