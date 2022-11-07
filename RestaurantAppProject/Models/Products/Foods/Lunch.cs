@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace RestaurantAppProject.Models.Products.Foods
 {
-    internal class Lunch
+    internal class Lunch : Food
     {
+        public Lunch(string name, string description, decimal price, List<string> ingredients)
+            : base(name, description, price, ingredients)
+        {
+
+        }
     }
 }

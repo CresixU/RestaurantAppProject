@@ -11,9 +11,9 @@ namespace RestaurantAppProject.Services.Drinks
     {
         List<Tea> Teas = new List<Tea>();
 
-        public void Create(string name, string description, decimal price, int capacity, decimal vol = 0)
+        public void Create(string name, string description, decimal price, int capacity, TeaType type)
         {
-            Teas.Add(new Tea(name, description, price, capacity));
+            Teas.Add(new Tea(name, description, price, capacity, type));
         }
 
         public void ShowDetails(Tea tea)
