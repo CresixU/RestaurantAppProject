@@ -9,12 +9,12 @@ namespace RestaurantAppProject.Models.People
     internal abstract class Person
     {
         protected Guid Id { get; }
-        protected string Name { get; set; }
-        protected string Surname { get; set; }
-        protected DateOnly Birthdate { get; set; }
-        protected string Email { get; set; }
-        protected string Password { get; set; }
-        protected int Points { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public DateOnly Birthdate { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public int Points { get; set; }
 
         public Person(string name, string surname, DateOnly birthdate, string email, string password)
         {
