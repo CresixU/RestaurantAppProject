@@ -11,12 +11,17 @@ namespace RestaurantAppProject.Services
 {
     internal class OrderService
     {
-        public List<Order> orders = new List<Order>();
-
-        public void Create(List<Item> items, decimal price,Person owner)
+        public List<Order> Orders { get; set; }
+        public static int OrderId { get; set; }
+        public OrderService()
         {
+            Orders = new List<Order>();
+            OrderId = 1;
+        }
 
-            orders.Add(new Order(items, price, owner));
+        public void Create(List<int> items, decimal price,int owner)
+        {
+            Orders.Add(new Order(items, price, owner));
         }
     }
 }

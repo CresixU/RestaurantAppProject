@@ -15,5 +15,26 @@ namespace RestaurantAppProject.Models.Products.Drinks
         {
             AlcoholVolume = vol;
         }
+
+
+        public override void ShowDetails()
+        {
+            Console.WriteLine(Name);
+            Console.WriteLine(Description);
+            Console.WriteLine(Price+"$");
+            Console.WriteLine(Capacity+"ml");
+            Console.WriteLine(AlcoholVolume+"%");
+        }
+
+        public static void Create(List<Drink> list,string name, string description, decimal price, int capacity, decimal vol)
+        {
+            list.Add(new Alcohol(name,description,price,capacity, vol));
+        }
+
+        public override void Delete(List<Drink> list)
+        {
+            Drink item = this;
+            list.Remove(item);
+        }
     }
 }
