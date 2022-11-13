@@ -20,12 +20,12 @@ namespace RestaurantAppProject.Models.People
         public int Points { get; set; }
         public List<Product> Basket { get; set; }
 
-        public Person(string name, string surname, string birthdate, string email, string password)
+        public Person(string name, string surname, DateOnly birthdate, string email, string password)
         {
             Id = PersonService.PersonId++;
             Name = name;
             Surname = surname;
-            Birthdate = DateOnly.FromDateTime(birthdate, "dd/MM/yyyy");
+            Birthdate = birthdate;
             Email = email;
             Password = password;
             Points = 0;
