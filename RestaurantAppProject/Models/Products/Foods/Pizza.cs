@@ -10,14 +10,14 @@ namespace RestaurantAppProject.Models.Products.Foods
     {
         public int Size { get; set; }
 
-        public Pizza(string name, string description, decimal price, List<string> ingredients, Size size)
+        public Pizza(string name, string description, decimal price, List<string> ingredients, PizzaSize size)
             : base(name, description, price, ingredients)
         {
             Size = (int)size;
         }
     }
 
-    enum Size
+    enum PizzaSize
     {
         small = 25,
         medium = 35,

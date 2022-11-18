@@ -1,5 +1,6 @@
-﻿using RestaurantAppProject.Models.Products;
-using RestaurantAppProject.Services.Drinks;
+﻿using RestaurantAppProject.Models.Products.Drinks;
+using RestaurantAppProject.Services;
+using RestaurantAppProject.Tools;
 
 namespace RestaurantAppProject
 {
@@ -7,9 +8,19 @@ namespace RestaurantAppProject
     {
         static void Main(string[] args)
         {
-            AlcoholService alcoholService = new AlcoholService();
-            alcoholService.Create("Wódka", "Czysta polska żubrówka", 20.00M, 700, 40.00M);
-            alcoholService.ShowAll();
+            ProductService productService = new ProductService();
+            PersonService personService = new PersonService();
+            OrderService orderService = new OrderService();
+            ApplicationSeeder seeder = new ApplicationSeeder(productService, orderService, personService);
+            seeder.Seed();
+            //DataManager.LoadData(productService.Drinks, productService.Foods, orderService.Orders, personService.People);
+
+            foreach(var item in productService.Drinks)
+            {
+                Console.WriteLine(item.Id);
+            }
+            Console.WriteLine("hi");
+            //DataManager.SaveData(productService.Drinks, productService.Foods, orderService.Orders, personService.People);
         }
     }
 }
