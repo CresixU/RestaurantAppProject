@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantAppProject.Models.Products
 {
-    internal abstract class Food : Product
+    public abstract class Food : Product
     {
         public List<string>? Ingredients { get; set; }
 
@@ -15,5 +15,12 @@ namespace RestaurantAppProject.Models.Products
         {
             Ingredients = ingredients;
         }
+        public virtual void Delete(List<Food> list)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        protected string ShowIngrediens() => String.Join(',', Ingredients);
     }
 }
