@@ -32,8 +32,8 @@ namespace RestaurantAppProject.Services
             table.AddColumn(new TableColumn("[bold yellow]ID[/]").Centered());
             table.AddColumn(new TableColumn("[bold yellow]Name[/]").Centered());
             table.AddColumn(new TableColumn("[bold yellow]Price[/]").Centered());
-            table.AddColumn(new TableColumn("[bold yellow]Description[/]").Centered().Width(70));
-            table.AddColumn(new TableColumn("[bold yellow]Ingrediens[/]").Centered());
+            table.AddColumn(new TableColumn("[bold yellow]Description[/]").Width(70));
+            table.AddColumn(new TableColumn("[bold yellow]Ingrediens[/]"));
             table.AddColumn(new TableColumn("[bold yellow]Additional[/]").Centered());
             foreach (var food in foods)
             {
@@ -50,8 +50,8 @@ namespace RestaurantAppProject.Services
             table.AddColumn(new TableColumn("[bold yellow]ID[/]").Centered());
             table.AddColumn(new TableColumn("[bold yellow]Name[/]").Centered());
             table.AddColumn(new TableColumn("[bold yellow]Price[/]").Centered());
-            table.AddColumn(new TableColumn("[bold yellow]Description[/]").Centered().Width(70));
-            table.AddColumn(new TableColumn("[bold yellow]Capacity[/]").Centered());
+            table.AddColumn(new TableColumn("[bold yellow]Description[/]").Width(70));
+            table.AddColumn(new TableColumn("[bold yellow]Capacity[/]"));
             table.AddColumn(new TableColumn("[bold yellow]Additional[/]").Centered());
 
             foreach (var drink in drinks)
