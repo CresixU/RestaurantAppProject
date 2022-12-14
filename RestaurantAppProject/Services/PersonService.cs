@@ -30,6 +30,17 @@ namespace RestaurantAppProject.Services
                 Console.ReadKey();
                 return null;
             }
+            var password = AnsiConsole
+                .Prompt(new TextPrompt<string>("[yellow]Enter your password: [/]")
+                .PromptStyle("yellow")
+                .Secret());
+
+            if (person.Password != password)
+            {
+                AnsiConsole.Markup("[red]Wrong password[/]");
+                Console.ReadKey();
+                return null;
+            }
             return person;
         }
 

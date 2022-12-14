@@ -39,7 +39,7 @@ namespace RestaurantAppProject.Tools
             _productService.Foods.Add(new Soup("Pomidorowa", "Zupa pomidorowa", 7M, new List<string>() { "makaron", "marchew", "pietruszka", "seler" }));
 
 
-            _personService.People.Add(new Client("John", "Doe", new DateOnly(1986,1,20), "johndoe@mail.com", "password123"));
+            _personService.People.Add(new Client("John", "Doe", new DateOnly(1986,1,20), "johndoe@mail.com", "password"));
             _personService.People.Add(new Client("Will", "Smith", new DateOnly(1972, 5, 12), "willsmith@mail.com", "password123"));
             _personService.People.Add(new Employee("Toby", "O'brian", new DateOnly(1999, 9, 30), "tobyobrian@gmail.com", "easypassword"));
 
