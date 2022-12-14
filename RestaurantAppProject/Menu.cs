@@ -129,28 +129,12 @@ namespace RestaurantAppProject
 
         private Person LogIn()
         {
-            var mail = Validator.String("[yellow]Insert your Email: [/]", 5, 25);
-            var person = _personService.People.FirstOrDefault(p => p.Email == mail);
-            if (person is null)
-            {
-                AnsiConsole.Markup("[red]Person with this email was not found[/]");
-                Console.ReadKey();
-                return null;
-            }
-            return person;
+            return _personService.LogIn();
         }
 
         private void SingUp()
         {
-            _personService.People.Add(new Client(
-            
-                Validator.String("Insert your Name: ", 3, 25),
-                Validator.String("Insert your Surname: ", 3, 50),
-                Validator.Date("Insert your birthdate (dd.mm.yyyy): "),
-                Validator.String("Insert your Email: ", 7, 50),
-                Validator.Password()
-            ));
-            AnsiConsole.Markup("[green]Account succesfully created[/]");
+            _personService.SingUp();
         }
 
         private void AddToBasketOrSkip(string category)
