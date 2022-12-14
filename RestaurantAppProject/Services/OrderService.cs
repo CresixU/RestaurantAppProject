@@ -29,6 +29,12 @@ namespace RestaurantAppProject.Services
         {
             var orders = Orders.FindAll(o => o.OwnerId == person.Id);
 
+            if(!orders.Any())
+            {
+                AnsiConsole.Markup("[yellow1]There is no orders yet[/]");
+                return;
+            }
+
             Console.Clear();
             var grid = new Grid();
             grid.AddColumn();
@@ -60,12 +66,6 @@ namespace RestaurantAppProject.Services
                 .FindAll(f => order.Items.Contains(f.Id))
                 .Select(p => p.Name)
                 .Concat(foodNames);
-
-            if (!itemNames.Any())
-            {
-                AnsiConsole.Markup("[yellow1]No orders yet...[/]");
-                return new String("");
-            }
                 
 
             StringBuilder stringBuilder = new StringBuilder();

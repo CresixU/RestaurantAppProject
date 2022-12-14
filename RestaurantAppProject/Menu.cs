@@ -46,10 +46,16 @@ namespace RestaurantAppProject
                 grid.AddRow(new string[] { "Number", "Option" });
                 grid.AddRow(new string[] { "[yellow1]  1[/]", "Food" });
                 grid.AddRow(new string[] { "[yellow1]  2[/]", "Drinks" });
+                grid.AddEmptyRow();
                 grid.AddRow(new string[] { "[yellow1]  3[/]", "Show my information" });
                 grid.AddRow(new string[] { "[yellow1]  4[/]", "Show my order's history" });
+                grid.AddEmptyRow();
                 if (loggedPerson != null && loggedPerson.Basket.Any())
+                {
                     grid.AddRow(new string[] { "[yellow1]  P[/]", "Make an order" });
+                    grid.AddRow(new string[] { "[yellow1]  C[/]", "Clear my basket" });
+                    grid.AddEmptyRow();
+                }
                 grid.AddRow(new string[] { "[yellow1]  Q[/]", "Exit" });
 
                 AnsiConsole.Write(grid);
@@ -72,6 +78,9 @@ namespace RestaurantAppProject
                         break;
                     case 'p':
                         if (loggedPerson.Basket.Any()) Pay();
+                        break;
+                    case 'c':
+                        if (loggedPerson.Basket.Any()) ClearBasket();
                         break;
                     case 'q':
                         loggedPerson = null;
@@ -96,6 +105,7 @@ namespace RestaurantAppProject
                 grid.AddRow(new string[] { "Number", "Option" });
                 grid.AddRow(new string[] { "[yellow1]  1[/]", "Log in"});
                 grid.AddRow(new string[] { "[yellow1]  2[/]", "Create Account" });
+                grid.AddEmptyRow();
                 grid.AddRow(new string[] { "[yellow1]  Q[/]", "Exit" });
 
                 AnsiConsole.Write(grid);
@@ -206,7 +216,19 @@ namespace RestaurantAppProject
 
             loggedPerson.Points += (int)personPrice;
             AnsiConsole.Markup($"\n\n[yellow]You recived[/][green] {(int)personPrice}[/][yellow] points for this order[/]");
+        }
 
+        private void ClearBasket()
+        {
+            if (loggedPerson.Basket is null)
+            {
+                AnsiConsole.Markup("[red]Basket is empty[/]");
+                return;
+            }
+            if (!AnsiConsole.Confirm("\n[yellow]Do you want to clear your basket? [/]\n")) return;
+
+            loggedPerson.Basket.Clear();
+            AnsiConsole.Markup("[green]Basket is now empty[/]");
         }
 
     }
