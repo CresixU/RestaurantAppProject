@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantAppProject.Services
 {
-    internal class PersonService
+    public class PersonService
     {
         public List<Person> People { get; set; }
         public static int PersonId { get; set; }

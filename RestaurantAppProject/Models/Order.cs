@@ -4,7 +4,7 @@ using RestaurantAppProject.Services;
 
 namespace RestaurantAppProject.Models
 {
-    internal class Order
+    public class Order
     {
         public int Id { get; set; }
         public List<int> Items = new List<int>();

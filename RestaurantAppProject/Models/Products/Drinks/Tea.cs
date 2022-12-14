@@ -1,4 +1,5 @@
 ﻿using RestaurantAppProject.Models.Products.Drinks;
+using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +17,9 @@ namespace RestaurantAppProject.Models.Products
         {
             Type = type;
         }
-        public override void ShowDetails()
+        public override void ShowDetails(Table table)
         {
-            Console.WriteLine(Name);
-            Console.WriteLine(Description);
-            Console.WriteLine(Price + "$");
-            Console.WriteLine(Capacity + "ml");
-            Console.WriteLine(Type);
+            table.AddRow($"{Id}", $"{Name}", $"{Price}", $"{Description}", $"{Capacity + "ml"}", $"{Type}");
         }
 
         public static void Create(List<Drink> list, string name, string description, decimal price, int capacity, TeaType type)

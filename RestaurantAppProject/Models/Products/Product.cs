@@ -1,4 +1,5 @@
 ﻿using RestaurantAppProject.Services;
+using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +25,7 @@ namespace RestaurantAppProject.Models.Products
             RewardsInPoints = (int)Price;
         }
 
-        public virtual void ShowDetails()
-        {
-            throw new NotImplementedException();
-        }
-        public virtual void Delete(List<Drink> list)
+        public virtual void ShowDetails(Table table)
         {
             throw new NotImplementedException();
         }

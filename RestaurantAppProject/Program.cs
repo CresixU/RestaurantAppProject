@@ -13,13 +13,12 @@ namespace RestaurantAppProject
             OrderService orderService = new OrderService();
             ApplicationSeeder seeder = new ApplicationSeeder(productService, orderService, personService);
             seeder.Seed();
+            Console.WriteLine(personService.People[0].Email);
+            Menu menu = new Menu(productService, personService, orderService);
+            menu.Show();
             //DataManager.LoadData(productService.Drinks, productService.Foods, orderService.Orders, personService.People);
 
-            foreach(var item in productService.Drinks)
-            {
-                Console.WriteLine(item.Id);
-            }
-            Console.WriteLine("hi");
+
             //DataManager.SaveData(productService.Drinks, productService.Foods, orderService.Orders, personService.People);
         }
     }

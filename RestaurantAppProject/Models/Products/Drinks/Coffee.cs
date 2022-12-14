@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spectre.Console;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,12 +15,9 @@ namespace RestaurantAppProject.Models.Products.Drinks
         {
         }
 
-        public override void ShowDetails()
+        public override void ShowDetails(Table table)
         {
-            Console.WriteLine(Name);
-            Console.WriteLine(Description);
-            Console.WriteLine(Price + "$");
-            Console.WriteLine(Capacity + "ml");
+            table.AddRow($"{Id}", $"{Name}", $"{Price}", $"{Description}", $"{Capacity + "ml"}", "");
         }
 
         public static void Create(List<Drink> list, string name, string description, decimal price, int capacity)
@@ -29,7 +27,7 @@ namespace RestaurantAppProject.Models.Products.Drinks
 
         public override void Delete(List<Drink> list)
         {
-            Drink item = this;
+            var item = this;
             list.Remove(item);
         }
     }

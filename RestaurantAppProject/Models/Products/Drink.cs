@@ -15,6 +15,10 @@ namespace RestaurantAppProject.Models.Products
         {
             Capacity = capacity;
         }
+        public virtual void Delete(List<Drink> list)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

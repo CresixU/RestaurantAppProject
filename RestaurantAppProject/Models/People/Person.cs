@@ -1,5 +1,6 @@
 ﻿using RestaurantAppProject.Models.Products;
 using RestaurantAppProject.Services;
+using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantAppProject.Models.People
 {
-    internal abstract class Person
+    public abstract class Person
     {
         public int Id { get; }
         public string Name { get; set; }
@@ -30,6 +31,47 @@ namespace RestaurantAppProject.Models.People
             Password = password;
             Points = 0;
             Basket = new List<Product>();
+        }
+
+        public void ShowDetails()
+        {
+            Console.Clear();
+            var grid = new Grid();
+            grid.AddColumn();
+            grid.AddColumn();
+            grid.AddRow(new string[] { "Person: ", $"{Name} {Surname}"});
+            grid.AddRow(new string[] { "Email: ", $"{Email}"});
+            grid.AddRow(new string[] { "Birthdate: ", $"{Birthdate}" });
+            grid.AddRow(new string[] { "Points: ", $"{Points}" });
+            AnsiConsole.Write(grid);
+
+            AnsiConsole.Markup("\n[yellow]Items in basket[/]\n");
+            if (Basket.Count > 0) DisplayBasket();
+            else AnsiConsole.Markup("Basket is empty");
+
+            AnsiConsole.Markup("\n\n\n[grey]Press any key to back[/]\n");
+        }
+
+        private void DisplayBasket()
+        {
+            if (Basket == null)
+            {
+                AnsiConsole.Markup("[green]Basket is empty[/]");
+            }
+
+            decimal costs = 0m;
+            var grid = new Grid();
+            grid.AddColumn();
+            grid.AddColumn();
+            grid.AddRow(new string[] { "[yellow]Price[/]", "[yellow]Item[/]" });
+            
+            foreach (var item in Basket)
+            {
+                grid.AddRow(new string[] { $"{item.Price}", $"[grey70]{item.Name}[/]" });
+                costs += item.Price;
+            }
+            AnsiConsole.Write(grid);
+            AnsiConsole.Markup($"\n[yellow]Total:[/] [yellow1]{costs}[/]");
         }
     }
 }
