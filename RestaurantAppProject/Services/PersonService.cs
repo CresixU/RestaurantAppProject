@@ -22,7 +22,7 @@ namespace RestaurantAppProject.Services
 
         public Person LogIn()
         {
-            var mail = Validator.String("[yellow]Insert your Email: [/]", 5, 25);
+            var mail = Validator.String("[yellow]Insert your Email: [/]", 5, 50);
             var person = People.FirstOrDefault(p => p.Email == mail);
             if (person is null)
             {
@@ -49,7 +49,7 @@ namespace RestaurantAppProject.Services
             People.Add(new Client(
 
                 Validator.String("Insert your Name: ", 3, 25),
-                Validator.String("Insert your Surname: ", 3, 50),
+                Validator.String("Insert your Surname: ", 3, 25),
                 Validator.Date("Insert your birthdate (dd.mm.yyyy): "),
                 Validator.String("Insert your Email: ", 7, 50),
                 Validator.Password()
