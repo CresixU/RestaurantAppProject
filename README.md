@@ -8,6 +8,7 @@ A console application that imitates the behavior of a popular fast food restaura
 
 ## Libraries
 - Spectre.Console.Cli
+- SimpleHashing.NET
 - Newtonsoft.Json
 
 ## Problems
