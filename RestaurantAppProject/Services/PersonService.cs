@@ -1,5 +1,6 @@
 ﻿using RestaurantAppProject.Models.People;
 using RestaurantAppProject.Tools;
+using SimpleHashing.Net;
 using Spectre.Console;
 using System;
 using System.Collections.Generic;
@@ -33,14 +34,18 @@ namespace RestaurantAppProject.Services
             var password = AnsiConsole
                 .Prompt(new TextPrompt<string>("[yellow]Enter your password: [/]")
                 .PromptStyle("yellow")
-                .Secret());
+            .Secret());
 
-            if (person.Password != password)
+            ISimpleHash passwordHasher = new SimpleHash();
+            bool isPasswordValid = passwordHasher.Verify(password, person.Password);
+
+            if(!isPasswordValid)
             {
                 AnsiConsole.Markup("[red]Wrong password[/]");
                 Console.ReadKey();
                 return null;
             }
+
             return person;
         }
 
