@@ -39,9 +39,9 @@ namespace RestaurantAppProject.Tools
             _productService.Foods.Add(new Soup("Pomidorowa", "Zupa pomidorowa", 7M, new List<string>() { "makaron", "marchew", "pietruszka", "seler" }));
 
 
-            _personService.People.Add(new Client("John", "Doe", new DateOnly(1986,1,20), "johndoe@mail.com", "password"));
-            _personService.People.Add(new Client("Will", "Smith", new DateOnly(1972, 5, 12), "willsmith@mail.com", "password123"));
-            _personService.People.Add(new Employee("Toby", "O'brian", new DateOnly(1999, 9, 30), "tobyobrian@gmail.com", "easypassword"));
+            _personService.People.Add(new Client("John", "Doe", new DateOnly(1986,1,20), "johndoe@mail.com", "Rfc2898DeriveBytes$50000$re7YP3aJzqWKDZrrPSJK+g==$b3+Jc38YI3okEK0Eyap4HBd97O5p5o61SMevxAFobFs=")); //password
+            _personService.People.Add(new Client("Will", "Smith", new DateOnly(1972, 5, 12), "willsmith@mail.com", "Rfc2898DeriveBytes$50000$re7YP3aJzqWKDZrrPSJK+g==$b3+Jc38YI3okEK0Eyap4HBd97O5p5o61SMevxAFobFs=")); //password
+            _personService.People.Add(new Employee("Toby", "O'brian", new DateOnly(1999, 9, 30), "tobyobrian@gmail.com", "Rfc2898DeriveBytes$50000$re7YP3aJzqWKDZrrPSJK+g==$b3+Jc38YI3okEK0Eyap4HBd97O5p5o61SMevxAFobFs=")); //password
 
             _orderService.Orders.Add(new Order(new List<int>() { 4, 6, 7 }, 45.89M, 1));
             _orderService.Orders.Add(new Order(new List<int>() { 1, 3, 5 }, 30.25M, 2));
