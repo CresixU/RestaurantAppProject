@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="SimpleHashing.Net" Version="2.1.0" />
     <PackageReference Include="Spectre.Console.Cli" Version="0.45.0" />
   </ItemGroup>
 

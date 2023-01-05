@@ -1,5 +1,6 @@
 ﻿using RestaurantAppProject.Models.People;
 using RestaurantAppProject.Tools;
+using SimpleHashing.Net;
 using Spectre.Console;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace RestaurantAppProject.Services
 
         public Person LogIn()
         {
-            var mail = Validator.String("[yellow]Insert your Email: [/]", 5, 25);
+            var mail = Validator.String("[yellow]Insert your Email: [/]", 5, 50);
             var person = People.FirstOrDefault(p => p.Email == mail);
             if (person is null)
             {
@@ -33,14 +34,18 @@ namespace RestaurantAppProject.Services
             var password = AnsiConsole
                 .Prompt(new TextPrompt<string>("[yellow]Enter your password: [/]")
                 .PromptStyle("yellow")
-                .Secret());
+            .Secret());
 
-            if (person.Password != password)
+            ISimpleHash passwordHasher = new SimpleHash();
+            bool isPasswordValid = passwordHasher.Verify(password, person.Password);
+
+            if(!isPasswordValid)
             {
                 AnsiConsole.Markup("[red]Wrong password[/]");
                 Console.ReadKey();
                 return null;
             }
+
             return person;
         }
 
@@ -49,7 +54,7 @@ namespace RestaurantAppProject.Services
             People.Add(new Client(
 
                 Validator.String("Insert your Name: ", 3, 25),
-                Validator.String("Insert your Surname: ", 3, 50),
+                Validator.String("Insert your Surname: ", 3, 25),
                 Validator.Date("Insert your birthdate (dd.mm.yyyy): "),
                 Validator.String("Insert your Email: ", 7, 50),
                 Validator.Password()

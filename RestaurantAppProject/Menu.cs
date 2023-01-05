@@ -178,6 +178,17 @@ namespace RestaurantAppProject
             }
             if (!AnsiConsole.Confirm("\n[yellow]Do you want to pay now? [/]\n")) return;
 
+            if(loggedPerson.Points>0)
+            {
+                decimal discount = loggedPerson.Points / 10;
+                if (!AnsiConsole.Confirm($"\n[yellow]Do you want to use your points as discount[/](-{discount}zł)[yellow] in this order?[/]"))
+                {
+                    loggedPerson.Points = 0;
+                    AnsiConsole.Markup("[green]Discount Activated[/]");
+                }
+            }
+            
+
 
             AnsiConsole.Markup("[green]Payment succes[/]");
 

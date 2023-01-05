@@ -1,4 +1,5 @@
-﻿using Spectre.Console;
+﻿using SimpleHashing.Net;
+using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -118,11 +119,16 @@ namespace RestaurantAppProject.Tools
 
         public static string Password()
         {
-            while(true)
+            ISimpleHash passwordHasher = new SimpleHash();
+            while (true)
             {
                 var password = AnsiConsole.Prompt(new TextPrompt<string>("Enter your password: ").PromptStyle("yellow").Secret());
                 var password2 = AnsiConsole.Prompt(new TextPrompt<string>("Enter your password again: ").PromptStyle("yellow").Secret());
-                if (password.Equals(password2)) return password;
+                if (password.Equals(password2))
+                {
+                    string hashedPassword = passwordHasher.Compute(password);
+                    return hashedPassword;
+                }
                 else AnsiConsole.Markup("[red]Incorrect password[/]");
             }
         }
