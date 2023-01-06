@@ -12,5 +12,10 @@ A console application that imitates the behavior of a popular fast food restaura
 - SimpleHashing.NET
 - Newtonsoft.Json
 
+## TODO
+- Changeable user's data
+- Wallet
+- Logger
+
 ## Problems
 - not yet
