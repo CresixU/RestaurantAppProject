@@ -49,6 +49,8 @@ namespace RestaurantAppProject.Services
             }
             AnsiConsole.Write(grid);
 
+            AnsiConsole.Markup("\n\n\n[grey]Press any key to back[/]\n");
+
         }
 
 
