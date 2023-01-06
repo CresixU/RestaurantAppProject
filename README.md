@@ -12,4 +12,4 @@ A console application that imitates the behavior of a popular fast food restaura
 - Newtonsoft.Json
 
 ## Problems
-- Saving and reading data from file
+- not yet
