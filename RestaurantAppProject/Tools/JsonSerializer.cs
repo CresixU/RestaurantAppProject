@@ -13,7 +13,7 @@ namespace RestaurantAppProject.Tools
 
         public static void SaveData(List<T> list, string path)
         {
-            CreateFileIfNotExist(path);
+            FileOperation.CreateFileIfNotExist(path);
 
             if (!path.EndsWith(".json"))
             {
@@ -30,7 +30,7 @@ namespace RestaurantAppProject.Tools
         {
             List<T> list = new List<T>();
             if (!File.Exists(path)) return list;
-            if (IsFileEmpty(path)) return list;
+            if (FileOperation.IsFileEmpty(path)) return list;
             if (!path.EndsWith(".json")) return list;
 
             var serialized = await File.ReadAllTextAsync(path);
@@ -40,31 +40,6 @@ namespace RestaurantAppProject.Tools
             Console.WriteLine("Data loaded");
 
             return list;
-        }
-
-        private static void CreateFileIfNotExist(string path)
-        {
-            if (File.Exists(path))
-            {
-                try
-                {
-                    using (File.Create(path)) { };
-                }
-
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-        }
-
-        private static bool IsFileEmpty(string path)
-        {
-            FileInfo file = new FileInfo(path);
-            if (file.Length > 2)
-                return false;
-
-            return true;
         }
     }
 }
