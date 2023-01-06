@@ -8,19 +8,25 @@ namespace RestaurantAppProject
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize((int)(Console.WindowWidth * 1.5), (int)(Console.WindowHeight * 1.5));
+            Console.SetWindowSize((int)(Console.WindowWidth = 200), (int)(Console.WindowHeight = 40));
             ProductService productService = new ProductService();
             PersonService personService = new PersonService();
             OrderService orderService = new OrderService();
+            DataManager dataManager = new DataManager();
+            var list = dataManager.LoadData(productService.Drinks, productService.Foods, orderService.Orders, personService.People);
+            productService.Drinks = (List<Models.Products.Drink>)list[0];
+            productService.Foods = (List<Models.Products.Food>)list[1];
+            orderService.Orders = (List<Models.Order>)list[2];
+            personService.People = (List<Models.People.Person>)list[3];
             ApplicationSeeder seeder = new ApplicationSeeder(productService, orderService, personService);
-            seeder.Seed();
-            Console.WriteLine(personService.People[0].Email);
-            Menu menu = new Menu(productService, personService, orderService);
+            //seeder.Seed();
+            Console.WriteLine(productService.Drinks.Count);
+            Menu menu = new Menu(productService, personService, orderService, dataManager);
             menu.Show();
-            //DataManager.LoadData(productService.Drinks, productService.Foods, orderService.Orders, personService.People);
+           
 
 
-            //DataManager.SaveData(productService.Drinks, productService.Foods, orderService.Orders, personService.People);
+            dataManager.SaveData(productService.Drinks, productService.Foods, orderService.Orders, personService.People);
         }
     }
 }

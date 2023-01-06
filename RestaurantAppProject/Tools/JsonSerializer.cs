@@ -9,6 +9,8 @@ namespace RestaurantAppProject.Tools
 {
     internal class JsonSerializer<T>
     {
+        public static TypeNameHandling TypeNameHandling { get; private set; }
+
         public static void SaveData(List<T> list, string path)
         {
             CreateFileIfNotExist(path);
@@ -18,20 +20,23 @@ namespace RestaurantAppProject.Tools
                 Console.WriteLine("File should be json type");
                 return;
             }
-
-            string serialize = JsonConvert.SerializeObject(list);
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All};
+            string serialize = JsonConvert.SerializeObject(list, settings);
 
             File.WriteAllText(path, serialize);
         }
 
-        public static List<T> LoadData(string path)
+        async public static Task<List<T>> LoadData(string path)
         {
             List<T> list = new List<T>();
             if (!File.Exists(path)) return list;
             if (IsFileEmpty(path)) return list;
             if (!path.EndsWith(".json")) return list;
 
-            list = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(path));
+            var serialized = await File.ReadAllTextAsync(path);
+
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+            list = JsonConvert.DeserializeObject<List<T>>(serialized, settings);
             Console.WriteLine("Data loaded");
 
             return list;
