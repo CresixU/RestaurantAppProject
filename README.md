@@ -4,6 +4,7 @@ A console application that imitates the behavior of a popular fast food restaura
 ## Features
 - Readable and colorful menu
 - Login and singup system
+- Saving data to file
 
 
 ## Libraries
