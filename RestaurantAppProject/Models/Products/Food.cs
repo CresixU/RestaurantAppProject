@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantAppProject.Models.Products
 {
-    public abstract class Food : Product
+    public class Food : Product
     {
         public List<string>? Ingredients { get; set; }
 

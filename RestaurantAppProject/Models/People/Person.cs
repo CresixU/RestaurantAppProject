@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantAppProject.Models.People
 {
-    public abstract class Person
+    public class Person
     {
         public int Id { get; }
         public string Name { get; set; }

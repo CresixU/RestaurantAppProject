@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantAppProject.Models.Products
 {
-    public abstract class Drink : Product
+    public class Drink : Product
     {
         public int Capacity { get; set; }
 

@@ -14,16 +14,18 @@ namespace RestaurantAppProject
 {
     public class Menu
     {
-        public Menu(ProductService productService,PersonService personService, OrderService orderService)
+        public Menu(ProductService productService,PersonService personService, OrderService orderService, DataManager dataManager)
         {
             _productService = productService;
             _personService = personService;
             _orderService = orderService;
+            _dataManager = dataManager;
         }
         Person? loggedPerson = null;
         private readonly ProductService _productService;
         private readonly PersonService _personService;
         private readonly OrderService _orderService;
+        private readonly DataManager _dataManager;
 
         public void Show()
         {
@@ -60,6 +62,7 @@ namespace RestaurantAppProject
 
                 AnsiConsole.Write(grid);
                 char keyCategory = Console.ReadKey(true).KeyChar;
+                _dataManager.SaveData(_productService.Drinks, _productService.Foods, _orderService.Orders, _personService.People);
                 switch (keyCategory)
                 {
                     case '1':
@@ -207,7 +210,7 @@ namespace RestaurantAppProject
                     loggedPerson.Id
                 );
             loggedPerson.Basket.Clear();
-            AnsiConsole.Markup($"\n\n[yellow]Your order's number is[/][green] {_orderService.Orders.FindLast(o => o.OwnerId == loggedPerson.Id).Id}[/][yellow] [/]");
+            AnsiConsole.Markup($"\n\n[yellow]Your order's number is[/][green] {_orderService.Orders.FindLast(o => o.OwnerId == loggedPerson.Id).Id}[/][yellow]. [/]");
 
             loggedPerson.Points += (int)personPrice;
             AnsiConsole.Markup($"\n\n[yellow]You recived[/][green] {(int)personPrice}[/][yellow] points for this order[/]");

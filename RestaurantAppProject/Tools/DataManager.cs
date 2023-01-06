@@ -4,17 +4,19 @@ using RestaurantAppProject.Models.Products;
 
 namespace RestaurantAppProject.Tools
 {
-    internal class DataManager
+    public class DataManager
     {
-        public static void LoadData(List<Drink> drinks, List<Food> food, List<Order> orders, List<Person> people)
+        public List<object> LoadData(List<Drink> drinks, List<Food> food, List<Order> orders, List<Person> people)
         {
-            drinks = JsonSerializer<Drink>.LoadData("drinks.json");
-            food = JsonSerializer<Food>.LoadData("food.json");
-            orders = JsonSerializer<Order>.LoadData("orders.json");
-            people = JsonSerializer<Person>.LoadData("people.json");
+            drinks = JsonSerializer<Drink>.LoadData("drinks.json").Result;
+            food = JsonSerializer<Food>.LoadData("food.json").Result;
+            orders = JsonSerializer<Order>.LoadData("orders.json").Result;
+            people = JsonSerializer<Person>.LoadData("people.json").Result;
+
+            return new List<object> { drinks, food, orders, people };
         }
 
-        public static void SaveData(List<Drink> drinks, List<Food> food, List<Order> orders, List<Person> people)
+        public void SaveData(List<Drink> drinks, List<Food> food, List<Order> orders, List<Person> people)
         {
             JsonSerializer<Drink>.SaveData(drinks, "drinks.json");
             JsonSerializer<Food>.SaveData(food, "food.json");
