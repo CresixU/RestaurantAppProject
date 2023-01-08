@@ -15,7 +15,7 @@ namespace RestaurantAppProject.Tools
         {
             while (true)
             {
-                Console.Write(text);
+                AnsiConsole.Markup(text);
                 try
                 {
                     int number = int.Parse(Console.ReadLine());
@@ -24,15 +24,15 @@ namespace RestaurantAppProject.Tools
                 }
                 catch (ArgumentNullException)
                 {
-                    Console.WriteLine("There is no data");
+                    AnsiConsole.Markup("[red]There is no data[/]");
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("Not a number");
+                    AnsiConsole.Markup("[red]Not a number[/]");
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    AnsiConsole.Markup($"[red]{e.Message}[/]");
                 }
             }
         }
@@ -45,7 +45,7 @@ namespace RestaurantAppProject.Tools
                 try
                 {
                     string output = Console.ReadLine();
-                    if (string.IsNullOrWhiteSpace(output)) throw new Exception("String is empty");
+                    if (string.IsNullOrWhiteSpace(output)) throw new Exception("Text is empty");
                     if (output.Length >= maxLength) throw new Exception($"Text should not be longer than {maxLength} characters");
                     if (output.Length <= minLength) throw new Exception($"Text should be longer than {minLength} characters");
 
@@ -53,19 +53,19 @@ namespace RestaurantAppProject.Tools
                 }
                 catch (OutOfMemoryException e)
                 {
-                    Console.WriteLine(e.Message);
+                    AnsiConsole.Markup($"[red]{e.Message}[/]");
                 }
                 catch (IOException e)
                 {
-                    Console.WriteLine(e.Message);
+                    AnsiConsole.Markup($"[red]{e.Message}[/]");
                 }
                 catch (ArgumentOutOfRangeException e)
                 {
-                    Console.WriteLine(e.Message);
+                    AnsiConsole.Markup($"[red]{e.Message}[/]");
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    AnsiConsole.Markup($"[red]{e.Message}[/]");
                 }
             }
         }
@@ -81,7 +81,7 @@ namespace RestaurantAppProject.Tools
                 Regex regex = new Regex(pattern);
 
                 if (regex.IsMatch(date)) break;
-                else Console.WriteLine("Incorrect date format.");
+                else AnsiConsole.Markup("[red]Incorrect date format.[/]");
             }
             
 
@@ -90,7 +90,7 @@ namespace RestaurantAppProject.Tools
             {
                 if (result < 1 || result > 31)
                 {
-                    Console.Write("Incorrect date ");
+                    AnsiConsole.Markup("[red]Incorrect day [/]");
                     return new DateOnly(1, 1, 1);
                 }
             }
@@ -99,17 +99,16 @@ namespace RestaurantAppProject.Tools
             {
                 if (result < 1 || result > 12)
                 {
-                    Console.Write("Incorrect date ");
+                    AnsiConsole.Markup("[red]Incorrect month [/]");
                     return new DateOnly(1,1,1);
                 }
-               
             }
 
             if (int.TryParse(arrayDate[2], out result))
             {
                 if (result < (DateTime.Now.Year-120) || result > DateTime.Now.Year)
                 {
-                    Console.Write("Incorrect date ");
+                    AnsiConsole.Markup("[red]Incorrect year [/]");
                     return new DateOnly(1, 1, 1);
                 }
             }

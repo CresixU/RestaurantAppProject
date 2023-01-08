@@ -56,10 +56,20 @@ namespace RestaurantAppProject.Services
                 Validator.String("Insert your Name: ", 3, 25),
                 Validator.String("Insert your Surname: ", 3, 25),
                 Validator.Date("Insert your birthdate (dd.mm.yyyy): "),
-                Validator.String("Insert your Email: ", 7, 50),
+                Validator.String("Insert your Email: ", 5, 50),
                 Validator.Password()
             ));
             AnsiConsole.Markup("[green]Account succesfully created[/]");
+        }
+
+        public void AddFounds(Person person)
+        {
+            var founds = Validator.Int("\nInsert amout of money you want to add: ");
+            if (AnsiConsole.Confirm($"\n[yellow]Are you sure? [/]"))
+            {
+                person.Balance += founds;
+                AnsiConsole.Markup($"\n\n[green]Your wallet has been topped up with [/]{founds}$[green].[/]\n\n[yellow]Your new balance: [/][green]{person.Balance}$[/][yellow].[/] ");
+            }
         }
     }
 }
