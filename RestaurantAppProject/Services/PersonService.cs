@@ -61,5 +61,15 @@ namespace RestaurantAppProject.Services
             ));
             AnsiConsole.Markup("[green]Account succesfully created[/]");
         }
+
+        public void AddFounds(Person person)
+        {
+            var founds = Validator.Int("\nInsert amout of money you want to add: ");
+            if (AnsiConsole.Confirm($"\n[yellow]Are you sure? [/]"))
+            {
+                person.Balance += founds;
+                AnsiConsole.Markup($"\n\n[green]Your wallet has been topped up with [/]{founds}$[green].[/]\n\n[yellow]Your new balance: [/][green]{person.Balance}$[/][yellow].[/] ");
+            }
+        }
     }
 }

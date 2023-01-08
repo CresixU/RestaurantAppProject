@@ -70,6 +70,9 @@ namespace RestaurantAppProject
                         loggedPerson.ShowDetails();
                         break;
                     case '4':
+                        AddFoundsToWallet();
+                        break;
+                    case '5':
                         _orderService.OrdersHistory(_productService, loggedPerson);
                         break;
                     case 'p':
@@ -125,11 +128,13 @@ namespace RestaurantAppProject
 
         private Person LogIn()
         {
+            Console.Clear();
             return _personService.LogIn();
         }
 
         private void SingUp()
         {
+            Console.Clear();
             _personService.SingUp();
         }
 
@@ -192,7 +197,6 @@ namespace RestaurantAppProject
                     AnsiConsole.Markup("[green]Discount Activated[/]");
                 }
             }
-            
 
             var personBasket = loggedPerson.Basket.Select(p => p.Id).ToList<int>();
 
@@ -226,6 +230,11 @@ namespace RestaurantAppProject
 
             loggedPerson.Basket.Clear();
             AnsiConsole.Markup("[green]Basket is now empty[/]");
+        }
+
+        private void AddFoundsToWallet()
+        {
+            _personService.AddFounds(loggedPerson);
         }
 
     }
