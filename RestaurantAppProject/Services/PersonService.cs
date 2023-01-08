@@ -56,7 +56,7 @@ namespace RestaurantAppProject.Services
                 Validator.String("Insert your Name: ", 3, 25),
                 Validator.String("Insert your Surname: ", 3, 25),
                 Validator.Date("Insert your birthdate (dd.mm.yyyy): "),
-                Validator.String("Insert your Email: ", 7, 50),
+                Validator.String("Insert your Email: ", 5, 50),
                 Validator.Password()
             ));
             AnsiConsole.Markup("[green]Account succesfully created[/]");
