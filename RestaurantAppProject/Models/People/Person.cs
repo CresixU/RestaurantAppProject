@@ -1,12 +1,6 @@
 ﻿using RestaurantAppProject.Models.Products;
 using RestaurantAppProject.Services;
 using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestaurantAppProject.Models.People
 {

@@ -1,14 +1,7 @@
-﻿using RestaurantAppProject.Exceptions;
-using RestaurantAppProject.Models.People;
-using RestaurantAppProject.Models.Products.Foods;
+﻿using RestaurantAppProject.Models.People;
 using RestaurantAppProject.Services;
 using RestaurantAppProject.Tools;
 using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestaurantAppProject
 {
