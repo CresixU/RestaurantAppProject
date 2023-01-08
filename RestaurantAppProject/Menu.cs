@@ -169,32 +169,34 @@ namespace RestaurantAppProject
         {
             if (loggedPerson.Basket is null)
             {
-                AnsiConsole.Markup("[red]Basket is empty[/]");
+                AnsiConsole.Markup("[red]\nBasket is empty[/]");
                 return;
             }
+
+            var costs = loggedPerson.CalculateBasket();
+            if (loggedPerson.Balance < costs) 
+                AnsiConsole.Markup($"[red]\nYou don't have enough money [/]({costs})[red] in your wallet.[/]");
+
+
+            AnsiConsole.Markup($"\n[yellow]Total costs [/]{costs}$[yellow].[/]");
+
             if (!AnsiConsole.Confirm("\n[yellow]Do you want to pay now? [/]\n")) return;
 
             if(loggedPerson.Points>0)
             {
                 decimal discount = loggedPerson.Points / 10;
-                if (!AnsiConsole.Confirm($"\n[yellow]Do you want to use your points as discount[/](-{discount}zł)[yellow] in this order?[/]"))
+                if(discount >= costs) discount = costs;
+                if (AnsiConsole.Confirm($"\n[yellow]Do you want to use your points as discount[/](-{discount}$)[yellow] in this order?[/]"))
                 {
-                    loggedPerson.Points = 0;
+                    loggedPerson.Points -= (int)discount;
                     AnsiConsole.Markup("[green]Discount Activated[/]");
                 }
             }
             
 
+            var personBasket = loggedPerson.Basket.Select(p => p.Id).ToList<int>();
 
-            AnsiConsole.Markup("[green]Payment succes[/]");
-
-            var personBasket = loggedPerson
-                                .Basket.Select(p => p.Id)
-                                .ToList<int>();
-
-            var personPrice = loggedPerson
-                                .Basket
-                                .Sum(p => p.Price);
+            var personPrice = loggedPerson.CalculateBasket();
 
             _orderService.Create
                 (
@@ -202,6 +204,10 @@ namespace RestaurantAppProject
                     personPrice,
                     loggedPerson.Id
                 );
+
+            loggedPerson.Balance -= costs;
+            AnsiConsole.Markup("[green]\nPayment succes[/]");
+
             loggedPerson.Basket.Clear();
             AnsiConsole.Markup($"\n\n[yellow]Your order's number is[/][green] {_orderService.Orders.FindLast(o => o.OwnerId == loggedPerson.Id).Id}[/][yellow]. [/]");
 

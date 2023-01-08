@@ -12,6 +12,7 @@ namespace RestaurantAppProject.Models.People
         public DateOnly Birthdate { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public decimal Balance { get; set; }
         public int Points { get; set; }
         public List<Product> Basket { get; set; }
 
@@ -24,6 +25,7 @@ namespace RestaurantAppProject.Models.People
             Email = email;
             Password = password;
             Points = 0;
+            Balance = 0;
             Basket = new List<Product>();
         }
 
@@ -36,6 +38,7 @@ namespace RestaurantAppProject.Models.People
             grid.AddRow(new string[] { "Person: ", $"{Name} {Surname}"});
             grid.AddRow(new string[] { "Email: ", $"{Email}"});
             grid.AddRow(new string[] { "Birthdate: ", $"{Birthdate}" });
+            grid.AddRow(new string[] { "Balance: ", $"{Balance}$" });
             grid.AddRow(new string[] { "Points: ", $"{Points}" });
             AnsiConsole.Write(grid);
 
@@ -53,7 +56,6 @@ namespace RestaurantAppProject.Models.People
                 AnsiConsole.Markup("[green]Basket is empty[/]");
             }
 
-            decimal costs = 0m;
             var grid = new Grid();
             grid.AddColumn();
             grid.AddColumn();
@@ -62,10 +64,16 @@ namespace RestaurantAppProject.Models.People
             foreach (var item in Basket)
             {
                 grid.AddRow(new string[] { $"{item.Price}", $"[grey70]{item.Name}[/]" });
-                costs += item.Price;
             }
             AnsiConsole.Write(grid);
-            AnsiConsole.Markup($"\n[yellow]Total:[/] [yellow1]{costs}[/]");
+            AnsiConsole.Markup($"\n[yellow]Total:[/] [yellow1]{CalculateBasket}$[/]");
+        }
+
+        public decimal CalculateBasket()
+        {
+            var costs = 0.00m;
+            costs = Basket.Sum(i => i.Price);
+            return costs;
         }
     }
 }
