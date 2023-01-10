@@ -43,7 +43,9 @@ namespace RestaurantAppProject
                 grid.AddRow(new string[] { "[yellow1]  2[/]", "Drinks" });
                 grid.AddEmptyRow();
                 grid.AddRow(new string[] { "[yellow1]  3[/]", "Show my information" });
-                grid.AddRow(new string[] { "[yellow1]  4[/]", "Show my order's history" });
+                grid.AddRow(new string[] { "[yellow1]  4[/]", "Add founds to my wallet" });
+                grid.AddRow(new string[] { "[yellow1]  5[/]", "Show my order's history" });
+                grid.AddRow(new string[] { "[yellow1]  6[/]", "Change personal data" });
                 grid.AddEmptyRow();
                 if (loggedPerson != null && loggedPerson.Basket.Any())
                 {
@@ -67,13 +69,16 @@ namespace RestaurantAppProject
                         AddToBasketOrSkip("drink");
                         break;
                     case '3':
-                        loggedPerson.ShowDetails();
+                        _personService.ShowDetails(loggedPerson);
                         break;
                     case '4':
                         AddFoundsToWallet();
                         break;
                     case '5':
                         _orderService.OrdersHistory(_productService, loggedPerson);
+                        break;
+                    case '6':
+                        _personService.ChangePersonalData(loggedPerson);
                         break;
                     case 'p':
                         if (loggedPerson.Basket.Any()) Pay();
@@ -178,9 +183,9 @@ namespace RestaurantAppProject
                 return;
             }
 
-            var costs = loggedPerson.CalculateBasket();
+            var costs = _personService.CalculateBasket(loggedPerson);
             if (loggedPerson.Balance < costs) 
-                AnsiConsole.Markup($"[red]\nYou don't have enough money [/]({costs})[red] in your wallet.[/]");
+                AnsiConsole.Markup($"[red]\nYou don't have enough money [/]({costs}$)[red] in your wallet.[/]");
 
 
             AnsiConsole.Markup($"\n[yellow]Total costs [/]{costs}$[yellow].[/]");
@@ -200,7 +205,7 @@ namespace RestaurantAppProject
 
             var personBasket = loggedPerson.Basket.Select(p => p.Id).ToList<int>();
 
-            var personPrice = loggedPerson.CalculateBasket();
+            var personPrice = _personService.CalculateBasket(loggedPerson);
 
             _orderService.Create
                 (

@@ -121,8 +121,8 @@ namespace RestaurantAppProject.Tools
             ISimpleHash passwordHasher = new SimpleHash();
             while (true)
             {
-                var password = AnsiConsole.Prompt(new TextPrompt<string>("Enter your password: ").PromptStyle("yellow").Secret());
-                var password2 = AnsiConsole.Prompt(new TextPrompt<string>("Enter your password again: ").PromptStyle("yellow").Secret());
+                var password = AnsiConsole.Prompt(new TextPrompt<string>("Enter password: ").PromptStyle("yellow").Secret());
+                var password2 = AnsiConsole.Prompt(new TextPrompt<string>("Enter password again: ").PromptStyle("yellow").Secret());
                 if (password.Equals(password2))
                 {
                     string hashedPassword = passwordHasher.Compute(password);
