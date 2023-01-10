@@ -130,6 +130,19 @@ namespace RestaurantAppProject.Services
             }
         }
 
+        public void ClearBasket(Person person)
+        {
+            if (person.Basket is null)
+            {
+                AnsiConsole.Markup("[red]Basket is empty[/]");
+                return;
+            }
+            if (!AnsiConsole.Confirm("\n[yellow]Do you want to clear your basket? [/]\n")) return;
+
+            person.Basket.Clear();
+            AnsiConsole.Markup("[green]Basket is now empty[/]");
+        }
+
         private void DisplayBasket(Person person)
         {
             if (person.Basket == null)

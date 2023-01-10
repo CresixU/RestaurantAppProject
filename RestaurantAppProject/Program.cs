@@ -1,5 +1,6 @@
 ﻿using RestaurantAppProject.Services;
 using RestaurantAppProject.Tools;
+using RestaurantAppProject.Views;
 
 namespace RestaurantAppProject
 {
@@ -23,7 +24,7 @@ namespace RestaurantAppProject
 
             ApplicationSeeder seeder = new ApplicationSeeder(productService, orderService, personService);
             seeder.Seed();
-            Menu menu = new Menu(productService, personService, orderService, dataManager);
+            MainView menu = new MainView(productService, personService, orderService, dataManager);
             menu.Show();
            
 

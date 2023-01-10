@@ -3,11 +3,11 @@ using RestaurantAppProject.Services;
 using RestaurantAppProject.Tools;
 using Spectre.Console;
 
-namespace RestaurantAppProject
+namespace RestaurantAppProject.Views
 {
-    public class Menu
+    public class MainView
     {
-        public Menu(ProductService productService,PersonService personService, OrderService orderService, DataManager dataManager)
+        public MainView(ProductService productService, PersonService personService, OrderService orderService, DataManager dataManager)
         {
             _productService = productService;
             _personService = personService;
@@ -22,16 +22,16 @@ namespace RestaurantAppProject
 
         public void Show()
         {
-            while(true)
+            while (true)
             {
-                if (loggedPerson is null) ShowMenuGuest();
+                if (loggedPerson is null) ShowMainViewGuest();
                 if (loggedPerson != null) ShowCategories();
             }
         }
 
         private void ShowCategories()
         {
-            while(true)
+            while (true)
             {
                 Console.Clear();
                 var grid = new Grid();
@@ -72,7 +72,7 @@ namespace RestaurantAppProject
                         _personService.ShowDetails(loggedPerson);
                         break;
                     case '4':
-                        AddFoundsToWallet();
+                        _personService.AddFounds(loggedPerson);
                         break;
                     case '5':
                         _orderService.OrdersHistory(_productService, loggedPerson);
@@ -81,10 +81,12 @@ namespace RestaurantAppProject
                         _personService.ChangePersonalData(loggedPerson);
                         break;
                     case 'p':
-                        if (loggedPerson.Basket.Any()) Pay();
+                        if (loggedPerson.Basket.Any())
+                            Pay();
                         break;
                     case 'c':
-                        if (loggedPerson.Basket.Any()) ClearBasket();
+                        if (loggedPerson.Basket.Any()) 
+                            _personService.ClearBasket(loggedPerson);
                         break;
                     case 'q':
                         loggedPerson = null;
@@ -97,7 +99,7 @@ namespace RestaurantAppProject
             }
 
         }
-        private void ShowMenuGuest()
+        private void ShowMainViewGuest()
         {
             do
             {
@@ -107,7 +109,7 @@ namespace RestaurantAppProject
                 grid.AddColumn();
 
                 grid.AddRow(new string[] { "Number", "Option" });
-                grid.AddRow(new string[] { "[yellow1]  1[/]", "Log in"});
+                grid.AddRow(new string[] { "[yellow1]  1[/]", "Log in" });
                 grid.AddRow(new string[] { "[yellow1]  2[/]", "Create Account" });
                 grid.AddEmptyRow();
                 grid.AddRow(new string[] { "[yellow1]  Q[/]", "Exit" });
@@ -147,7 +149,7 @@ namespace RestaurantAppProject
         {
             string choice = Validator.String("\nIf you want add somethig to basket, write it's [yellow]number[/] or press [yellow]'Q'[/]:");
             if (choice.ToUpper().StartsWith("Q")) return;
-            if(category == "food")
+            if (category == "food")
             {
                 var product = _productService.Foods.FirstOrDefault(f => f.Id.ToString() == choice);
                 if (product is null)
@@ -172,7 +174,7 @@ namespace RestaurantAppProject
                 AnsiConsole.Markup($"[yellow]{product.Name}[/][green] for [/][yellow]{product.Price}$[/][green] has been added to your basket[/]");
             }
             else AnsiConsole.Markup("[red]Something went wrong with categories [/]");
-            
+
         }
 
         private void Pay()
@@ -184,7 +186,7 @@ namespace RestaurantAppProject
             }
 
             var costs = _personService.CalculateBasket(loggedPerson);
-            if (loggedPerson.Balance < costs) 
+            if (loggedPerson.Balance < costs)
                 AnsiConsole.Markup($"[red]\nYou don't have enough money [/]({costs}$)[red] in your wallet.[/]");
 
 
@@ -192,10 +194,10 @@ namespace RestaurantAppProject
 
             if (!AnsiConsole.Confirm("\n[yellow]Do you want to pay now? [/]\n")) return;
 
-            if(loggedPerson.Points>0)
+            if (loggedPerson.Points > 0)
             {
                 decimal discount = loggedPerson.Points / 10;
-                if(discount >= costs) discount = costs;
+                if (discount >= costs) discount = costs;
                 if (AnsiConsole.Confirm($"\n[yellow]Do you want to use your points as discount[/](-{discount}$)[yellow] in this order?[/]"))
                 {
                     loggedPerson.Points -= (int)discount;
@@ -203,7 +205,7 @@ namespace RestaurantAppProject
                 }
             }
 
-            var personBasket = loggedPerson.Basket.Select(p => p.Id).ToList<int>();
+            var personBasket = loggedPerson.Basket.Select(p => p.Id).ToList();
 
             var personPrice = _personService.CalculateBasket(loggedPerson);
 
@@ -222,24 +224,6 @@ namespace RestaurantAppProject
 
             loggedPerson.Points += (int)personPrice;
             AnsiConsole.Markup($"\n\n[yellow]You recived[/][green] {(int)personPrice}[/][yellow] points for this order[/]");
-        }
-
-        private void ClearBasket()
-        {
-            if (loggedPerson.Basket is null)
-            {
-                AnsiConsole.Markup("[red]Basket is empty[/]");
-                return;
-            }
-            if (!AnsiConsole.Confirm("\n[yellow]Do you want to clear your basket? [/]\n")) return;
-
-            loggedPerson.Basket.Clear();
-            AnsiConsole.Markup("[green]Basket is now empty[/]");
-        }
-
-        private void AddFoundsToWallet()
-        {
-            _personService.AddFounds(loggedPerson);
         }
 
     }
