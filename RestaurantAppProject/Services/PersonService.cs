@@ -93,6 +93,7 @@ namespace RestaurantAppProject.Services
                 person.Balance += founds;
                 AnsiConsole.Markup($"\n\n[green]Your wallet has been topped up with [/]{founds}$[green].[/]\n\n[yellow]Your new balance: [/][green]{person.Balance}$[/][yellow].[/] ");
             }
+            else return;
         }
 
         public decimal CalculateBasket(Person person)
@@ -160,7 +161,7 @@ namespace RestaurantAppProject.Services
                 grid.AddRow(new string[] { $"{item.Price}", $"[grey70]{item.Name}[/]" });
             }
             AnsiConsole.Write(grid);
-            AnsiConsole.Markup($"\n[yellow]Total:[/] [yellow1]{CalculateBasket}$[/]");
+            AnsiConsole.Markup($"\n[yellow]Total:[/] [yellow1]{CalculateBasket(person)}[/]");
         }
 
         private void ChangeEmail(Person person)
