@@ -46,7 +46,7 @@ namespace RestaurantAppProject.Services
 
         public Person LogIn()
         {
-            var mail = Validator.String("[yellow]Insert your Email: [/]", 5, 50);
+            var mail = Validator.Email("[yellow]Insert your Email: [/]");
             var person = People.FirstOrDefault(p => p.Email == mail);
             if (person is null)
             {
@@ -79,10 +79,11 @@ namespace RestaurantAppProject.Services
                 Validator.String("Insert your Name: ", 3, 25),
                 Validator.String("Insert your Surname: ", 3, 25),
                 Validator.Date("Insert your birthdate (dd.mm.yyyy): "),
-                Validator.String("Insert your Email: ", 5, 50),
+                Validator.Email("Insert your Email: "),
                 Validator.Password()
             ));
             AnsiConsole.Markup("[green]Account succesfully created[/]");
+            Console.ReadKey(true);
         }
 
         public void AddFounds(Person person)
@@ -167,8 +168,7 @@ namespace RestaurantAppProject.Services
         private void ChangeEmail(Person person)
         {
             Console.Clear();
-            var newMail = Validator.String("[yellow1]New E-mail: [/]", 5, 100);
-            person.Email = newMail;
+            person.Email = Validator.Email("[yellow1]New E-mail: [/]");
             AnsiConsole.Markup("\n[green]Email has been changed[/]");
         }
 
