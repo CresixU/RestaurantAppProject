@@ -91,7 +91,7 @@ namespace RestaurantAppProject.Views
                 AnsiConsole.Markup($"\n[red]No order with this id[/]");
                 return;
             }
-            var owner = _personService.People.FirstOrDefault(p => p.Id.Equals(order.OwnerId);
+            var owner = _personService.People.FirstOrDefault(p => p.Id.Equals(order.OwnerId));
             Console.Clear();
             var grid = new Grid();
             grid.AddColumn();
@@ -99,7 +99,7 @@ namespace RestaurantAppProject.Views
 
             grid.AddRow(new string[] { "[yellow1]ID: [/]", $"{order.Id}" });
             grid.AddRow(new string[] { "[yellow1]Created date: [/]", $"{order.OrderTime}" });
-            grid.AddRow(new string[] { "[yellow1]Owener id: [/]", $"{order.OwnerId} {owner.Name} {owner.Surname})}" });
+            grid.AddRow(new string[] { "[yellow1]Owener id: [/]", $"{order.OwnerId} {owner.Name} {owner.Surname}" });
             grid.AddRow(new string[] { "[yellow1]Items: [/]", $"{_orderService.GetItemsName(_productService,order.Id)}" });
 
             AnsiConsole.Write(grid);
