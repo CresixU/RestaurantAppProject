@@ -131,5 +131,19 @@ namespace RestaurantAppProject.Tools
                 else AnsiConsole.Markup("[red]Incorrect password[/]");
             }
         }
+
+        public static string Email(string text)
+        {
+            var pattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{1,5}$";
+            Regex regex = new Regex(pattern);
+            var email = "";
+            do
+            {
+                email = String(text, 3);
+
+            } while (!regex.IsMatch(email));
+
+            return email;
+        }
     }
 }

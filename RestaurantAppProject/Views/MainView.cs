@@ -31,6 +31,11 @@ namespace RestaurantAppProject.Views
 
         private void ShowCategories()
         {
+            if (loggedPerson.Email.Contains("@local"))
+            {
+                EmployeeView employeeView = new EmployeeView(_productService,_personService,_orderService,_dataManager);
+                employeeView.Show(loggedPerson);
+            }
             while (true)
             {
                 Console.Clear();
@@ -147,7 +152,7 @@ namespace RestaurantAppProject.Views
 
         private void AddToBasketOrSkip(string category)
         {
-            string choice = Validator.String("\nIf you want add somethig to basket, write it's [yellow]number[/] or press [yellow]'Q'[/]:");
+            string choice = Validator.String("\nIf you want add somethig to basket, write it's [yellow]number[/] or press [yellow]'Q' to back[/]:");
             if (choice.ToUpper().StartsWith("Q")) return;
             if (category == "food")
             {

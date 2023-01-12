@@ -1,6 +1,7 @@
 ﻿using RestaurantAppProject.Models;
 using RestaurantAppProject.Models.People;
 using RestaurantAppProject.Models.Products;
+using RestaurantAppProject.Tools;
 using Spectre.Console;
 using System;
 using System.Collections.Generic;
@@ -53,8 +54,44 @@ namespace RestaurantAppProject.Services
 
         }
 
+        public Order FindOrderById()
+        {
+            if (!Orders.Any())
+            {
+                AnsiConsole.Markup("[yellow1]There is no orders yet[/]");
+                return null;
+            }
 
-        private string GetItemsName(ProductService productService, int orderId)
+            var orderId = Validator.Int("[yellow]Insert order id: [/]");
+            var order = Orders.FirstOrDefault(o => o.Id.Equals(orderId));
+
+            return order;
+        }
+
+        public void ShowAllOrders(ProductService productService)
+        {
+            if(!Orders.Any())
+            {
+                AnsiConsole.Markup("[yellow1]There is no orders yet[/]");
+                return;
+            }
+
+            Console.Clear();
+            var grid = new Grid();
+            grid.AddColumns(5);
+            grid.AddRow(new string[] { "[yellow1]ID[/]", "[yellow1]Date[/]", "[yellow1]Price[/]", "[yellow1]Items[/]", "[yellow1]Owner[/]" });
+            grid.AddRow(new string[] { "", "", "", "","" });
+            foreach (var order in Orders)
+            {
+                grid.AddRow(new string[] { $"{order.Id}", $"{order.OrderTime}", $"{order.Price}", $"{GetItemsName(productService, order.Id)}", $"{order.OwnerId}" });
+            }
+            AnsiConsole.Write(grid);
+
+
+        }
+
+
+        public string GetItemsName(ProductService productService, int orderId)
         {
             var order = Orders.FirstOrDefault(o => o.Id == orderId);
 
@@ -78,6 +115,14 @@ namespace RestaurantAppProject.Services
             }
 
             return stringBuilder.ToString();
+        }
+
+        public void CancelOrderById(Order order, PersonService personService)
+        {
+            var owner = personService.People.FirstOrDefault(p => p.Id.Equals(order.Id));
+            owner.Balance += order.Price;
+            owner.Points -= (int)(order.Price / 10);
+            Orders.Remove(order);
         }
     }
 }
