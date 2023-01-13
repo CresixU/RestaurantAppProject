@@ -38,7 +38,7 @@ namespace RestaurantAppProject.Views
                 grid.AddRow(new string[] { "[yellow1]  2[/]", "Find all orders by Person ID" });
                 grid.AddRow(new string[] { "[yellow1]  3[/]", "Find order by ID" });
                 grid.AddEmptyRow();
-                grid.AddRow(new string[] { "[yellow1]  Q[/]", "Exit" });
+                grid.AddRow(new string[] { "[yellow1]  Q[/]", "Exit / Customer View" });
 
                 AnsiConsole.Write(grid);
                 char keyCategory = Console.ReadKey(true).KeyChar;
