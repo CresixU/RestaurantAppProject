@@ -1,8 +1,9 @@
-﻿using Spectre.Console;
+﻿using RestaurantAppProject.Interfaces;
+using Spectre.Console;
 
 namespace RestaurantAppProject.Models.Products.Drinks
 {
-    internal class Coffee : Drink
+    internal class Coffee : Drink, IDrinkable
     {
 
         public Coffee(string name, string description, decimal price, int capacity)

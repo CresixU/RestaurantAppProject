@@ -15,5 +15,8 @@ namespace RestaurantAppProject.Models.Products
             throw new NotImplementedException();
         }
 
+        internal interface IDrinkable
+        {
+        }
     }
 }
