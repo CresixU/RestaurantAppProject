@@ -31,7 +31,7 @@ namespace RestaurantAppProject.Views
 
         private void ShowCategories()
         {
-            ClientView clientView = new ClientView(_productService, _personService, _orderService, _dataManager);
+            ClientView clientView = new ClientView(loggedPerson,_productService, _personService, _orderService, _dataManager);
             if (loggedPerson.Email.Contains("@local"))
             {
                 EmployeeView employeeView = new EmployeeView(_productService,_personService,_orderService,_dataManager);

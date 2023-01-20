@@ -12,14 +12,15 @@ namespace RestaurantAppProject.Views
 {
     public class ClientView
     {
-        public ClientView(ProductService productService, PersonService personService, OrderService orderService, DataManager dataManager)
+        public ClientView(Person person,ProductService productService, PersonService personService, OrderService orderService, DataManager dataManager)
         {
             _productService = productService;
             _personService = personService;
             _orderService = orderService;
             _dataManager = dataManager;
+            loggedPerson = person;
         }
-        Person? loggedPerson = null;
+        Person? loggedPerson;
         private readonly ProductService _productService;
         private readonly PersonService _personService;
         private readonly OrderService _orderService;
@@ -69,12 +70,14 @@ namespace RestaurantAppProject.Views
             var costs = _personService.CalculateBasket(loggedPerson);
             if (loggedPerson.Email.Contains("@local"))
             {
-                costs = costs * 0.75m;
+                costs = Math.Round(costs * 0.75m,2);
             }
             if (loggedPerson.Balance < costs)
+            {
                 AnsiConsole.Markup($"[red]\nYou don't have enough money [/]({costs}$)[red] in your wallet.[/]");
-
-
+                return;
+            }
+                
             AnsiConsole.Markup($"\n[yellow]Total costs [/]{costs}$[yellow].[/]");
             if (loggedPerson.Email.Contains("@local")) AnsiConsole.Markup("[green] -25% employee discount[/] ");
 
