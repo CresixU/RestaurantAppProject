@@ -6,7 +6,7 @@ namespace RestaurantAppProject.Models
 {
     public class Order
     {
-        public int Id { get; set; }
+        public int Id { get; }
         public List<int> Items = new List<int>();
         public DateTime OrderTime { get; set; }
         public decimal Price { get; set; }

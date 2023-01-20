@@ -8,7 +8,7 @@ namespace RestaurantAppProject
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize((int)(Console.WindowWidth = 200), (int)(Console.WindowHeight = 40));
+            Console.SetWindowSize(Console.WindowWidth = 200, (int)(Console.WindowHeight = 40));
 
             ProductService productService = new ProductService();
             PersonService personService = new PersonService();

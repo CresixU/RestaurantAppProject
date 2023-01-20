@@ -1,8 +1,9 @@
-﻿using Spectre.Console;
+﻿using RestaurantAppProject.Interfaces;
+using Spectre.Console;
 
 namespace RestaurantAppProject.Models.Products.Foods
 {
-    internal class Dessert : Food
+    internal class Dessert : Food, IEatable
     {
         public Dessert(string name, string description, decimal price, List<string> ingredients)
             : base(name, description, price, ingredients)

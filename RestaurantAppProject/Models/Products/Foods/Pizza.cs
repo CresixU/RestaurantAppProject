@@ -1,8 +1,9 @@
-﻿using Spectre.Console;
+﻿using RestaurantAppProject.Interfaces;
+using Spectre.Console;
 
 namespace RestaurantAppProject.Models.Products.Foods
 {
-    internal class Pizza : Food
+    internal class Pizza : Food, IEatable
     {
         public int Size { get; set; }
 

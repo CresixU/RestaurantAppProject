@@ -1,8 +1,9 @@
-﻿using Spectre.Console;
+﻿using RestaurantAppProject.Interfaces;
+using Spectre.Console;
 
 namespace RestaurantAppProject.Models.Products.Drinks
 {
-    internal class Alcohol : Drink
+    internal class Alcohol : Drink, IDrinkable
     {
         public decimal AlcoholVolume { get; set; }
 

@@ -3,7 +3,7 @@ namespace RestaurantAppProject.Models.Products
 {
     public class Food : Product
     {
-        public List<string>? Ingredients { get; set; }
+        public List<string>? Ingredients { get;}
 
         public Food(string name, string description, decimal price, List<string> ingredients)
             : base(name,description,price)

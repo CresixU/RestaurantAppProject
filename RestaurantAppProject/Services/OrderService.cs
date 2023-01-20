@@ -120,7 +120,7 @@ namespace RestaurantAppProject.Services
         public void CancelOrderById(Order order, PersonService personService)
         {
             var owner = personService.People.FirstOrDefault(p => p.Id.Equals(order.Id));
-            owner.Balance += order.Price;
+            owner.Balance += (decimal)MathF.Round((float)order.Price,2);
             owner.Points -= (int)(order.Price / 10);
             Orders.Remove(order);
         }
